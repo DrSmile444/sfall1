@@ -132,6 +132,44 @@
 
 ---
 
+## v1.19
+
+### Changed (defaults / values)
+- **[Input]**
+- `MouseSensitivity` **100 → 80**
+- `ReloadWeaponKey` **0 → 17** (now bound to **W/w**)
+
+- **[Misc]**
+- `ProcessorIdle` **1 → -1** (idle disabled by default)
+- `RemoveCriticalTimelimits` **0 → 1** (crit success/miss limits removed)
+- `AutoReloadWeapon` **0 → 1** (auto-reload after combat enabled)
+- `DrugExploitFix` **0 → 1** (exploit prevention on; comment wording clarified to “skill books and perk gain”)
+- `ReloadReserve` **-1 → 1** (from vanilla prompt to “reserve one mag; use the rest”)
+- `ColorLOS` **(unset/commented)** → **16** (yellow; options list expanded to include animated colors)
+- Local map defaults line now documented in **hex** (`0x1E0/0x190`) instead of decimals
+
+- **[Debugging]**
+- `ExtraCRC` comment now notes **multiple** comma-separated CRCs (value unchanged)
+
+### Removed (no longer present)
+- **[Misc]**
+- `BlackSkilldexFix` (was `1`)
+- `SaveInCombatFix` (was `1`)
+- `BonusHtHDamageFix` (was `1`)
+- `SuperStimExploitFix` (was `0`)
+
+> If you depended on any removed toggles, verify whether v1.19 integrates them internally or replace via scripts/patches.
+
+### Added
+- *(No brand-new keys beyond comment/doc updates in this diff; functional changes are primarily value flips and removals.)*
+
+### Practical Impact
+- **Gameplay/UX tighter by default:** exploit fixes ON, **auto-reload** ON, **LOS highlighting** ON.
+- **Performance semantics changed:** input loop idling disabled by default (`ProcessorIdle=-1`).
+- **Some legacy toggles removed:** confirm parity in engine or replace with mod scripts if needed.
+
+---
+
 ## v1.1
 
 ### Added / Fixed

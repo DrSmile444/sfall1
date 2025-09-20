@@ -2,6 +2,8 @@
 
 **sfall1** is a plugin that adds engine tweaks, fixes, and modding features to **Fallout 1**.
 
+![sfall1 screenshot](docs/banner.png)
+
 Main features of **sfall1** (the engine-tweak mod for *Fallout 1*):
 
 * Increased movement and combat speed (up to \~10× normal)

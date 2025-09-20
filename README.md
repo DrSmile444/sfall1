@@ -41,7 +41,13 @@ Development history:
 4. Tune options in `ddraw.ini` if you want.
 
 > Notes:
-> - Feature sets vary by version. See each version’s [`CHANGELOG/<version>.md`](CHANGELOG/) or original notes. 
+> - Feature sets vary by version. See each release or original notes. 
+
+---
+
+## Changelist
+
+See [`CHANGELIST.md`](CHANGELIST.md) for a summary of major changes, features, and fixes across sfall1 versions. This file provides a high-level overview for quick reference.
 
 ---
 

@@ -1,165 +1,342 @@
-List of changes:
+# Changelog
+
+> Legend: **Added**, **Changed**, **Fixed**, **Removed**  
+> Variables, functions, sections, and constants are formatted as code (e.g., `NumSoundBuffers`, `[Sound]`, `start_gdialog`).
+
+---
 
 ## v1.8
-+ Added [Sound] section and NumSoundBuffers variable to change the number of simultaneously played sound effects.
-+ Added ExtraSaveSlots variable.
-+ Added variable NumbersInDialogue to show selection numbers instead of dots in the dialog box.
-* The name of the InstanWeaponEquip variable has been corrected to InstantWeaponEquip (as it should have been originally).
-* Added EnableHeroAppearanceMod variable.
-  ! Fixed a bug where killed characters would freeze when using kill_critter_type.
-  ! Added checks to prevent crashes when using scripts with errors (equipping something without having it in your inventory).
-* Improved and corrected character control in battle - the character temporarily receives the "Observation" perk (of course, if the main character has it), armor removal when using a script mod has been fixed, the character's name is shown instead of the stealth indicator, karma is calculated correctly when killing enemies, and only the main character receives experience in battle (for example, for a quest).
-+ If a weapon has multiple sound effect options for a specific action, the effect is now randomly selected when played.
-  ! In FreeWeight, an incorrect visual change in the number of items on exchange tables has been fixed.
-  ! Fixed the use of a fixed position to call the start script procedure when there is no standard handler.
-  ! Added a fix for using imported procedures with variables (http://teamx.ru/site_arc/smf/index.php-topic=398.0.htm).
-  ! Fixed using gdialog_mod_barter with characters without the trade flag set.
-+ Added CanSeeAndHearFix variable to enable additional blindness and line-of-sight checks in the is_within_perception_ engine function.
-* TurnHighlightContainers now also affects dead characters.
-+ The TimeScale variable has been added to the [Speed] section to change (increase) the speed of time in the game.
-* Fixed handling of the mood parameter in the start_gdialog function - now it is always taken into account, and can also be equal to -1, in which case the mood is calculated by the engine using a zero local variable from the "talking head" script.
-  ! The functionality of the ProcessorIdle variable has been fixed.
-- The SkipSizeCheck and ExtraCRC variables have been removed from the [Debugging] section (a different method of checking data integrity is used), as well as Init (important messages are always written to sfall1-log.txt).
-  ! Fixed incorrect item counting in the item_count_ engine function.
-  ! The "Swing" perk has been fixed.
-  ! Several bugs related to battle recording have been fixed.
-+ Added the DamageFor mula variable to use the damage formula from F2, taking into account all ammunition parameters (armor-piercing ammo is not the same as semi-jacketed ammo). Modified pro ammunition files or the use of the AmmoFile variable with the corresponding data file are required.
-+ Added a new damage calculation formula - Haenlomal's Yet Another Ammo Mod. Requires modified Pro ammo files or the use of the AmmoFile variable with the appropriate data file.
-  ! Fixed the loss of additional movement points (from the "Movement Bonus" perk) if all main movement points were used.
-  ! Fixed an issue where the saved value of additional movement points (from the "Movement Bonus" perk) was ignored when loading into battle.
-  ! The "Silent Death" perk now also applies to critical hits.
-+ Added the combat_looks variable, similar to the "Info in battle" setting from F2: enabling it will allow you to assess the health status of another character in battle by hovering the crosshair cursor over them.
+
+### Added
+- `[Sound]` section and `NumSoundBuffers` to configure the number of simultaneously played SFX.
+- `ExtraSaveSlots`.
+- `NumbersInDialogue` to show selection numbers instead of dots in the dialog box.
+- `EnableHeroAppearanceMod`.
+- Randomized selection for weapon SFX variants when multiple are available for the same action.
+- `CanSeeAndHearFix` to enable additional blindness and LOS checks in the `is_within_perception_` engine function.
+- `TimeScale` under `[Speed]` to increase in-game time speed.
+- `DamageFormula` option to use Fallout 2’s damage formula considering all ammo parameters (requires modified Pro ammo files or `AmmoFile` with matching data).
+- New damage formula: **Haenlomal’s Yet Another Ammo Mod** (requires modified Pro ammo files or `AmmoFile` with matching data).
+- `combat_looks`, similar to F2’s “Info in battle” — hover the crosshair to assess a target’s health in combat.
+
+### Changed / Improved
+- Renamed `InstanWeaponEquip` → `InstantWeaponEquip` (originally intended name).
+- Combat control improvements:
+  - Temporarily grants the “Observation” perk to the controlled character (if the main character has it).
+  - Fixed armor removal when using script mods.
+  - Shows the character’s name instead of the stealth indicator.
+  - Correct karma calculation for enemy kills.
+  - Only the main character receives quest-related XP in combat.
+- `TurnHighlightContainers` now also affects dead characters.
+- `start_gdialog` mood handling: mood is always respected; can be `-1` to let the engine compute via the zero local variable from the talking head script.
+
+### Fixed
+- Frozen killed characters when using `kill_critter_type`.
+- Crash prevention when scripts attempt invalid actions (e.g., equipping items not in inventory).
+- Incorrect visual count changes on exchange tables in **FreeWeight**.
+- Using a fixed position to call the `start` script procedure when no standard handler is present.
+- Imported procedures with variables (see reference: <http://teamx.ru/site_arc/smf/index.php-topic=398.0.htm>).
+- `gdialog_mod_barter` with NPCs lacking the trade flag.
+- `ProcessorIdle` functionality.
+- Incorrect item counting in the `item_count_` engine function.
+- “Swing” perk behavior.
+- Multiple battle recording bugs.
+- Loss/restore logic for extra movement points from “Movement Bonus” perk (both on use and when loading into battle).
+- “Silent Death” now also applies to critical hits.
+
+### Removed
+- From `[Debugging]`: `SkipSizeCheck` and `ExtraCRC` (new data integrity method used), and `Init` (important messages are always logged to `sfall1-log.txt`).
+
+---
 
 ## v1.7
-* FreeWeight now shows "owning character's free weight/free bag size" for open nested bags.
-  ! Several bugs related to the "Take All"/"Put All" buttons (and nested bags) have been fixed.
-  ! Fixed an issue where items would disappear from the inventory when attempting to place them in a nested bag if the player was overloaded.
-+ The player's equipment screen now shows the "owning character's free weight/free bag size" of an open nested bag.
-  ! Fixed the engine's functionality for retrieving equipped armor and weapons from the player's hands if a nested bag is open in the inventory.
-  ! Fixed the message being displayed in the monitor window when hitting a random target if it's not a character and has a script.
-* When UseScrollWheel=1 you can scroll the monitor window (although not as efficiently as HRP does).
-  ! Fixed the use of nested bags in the trade window.
-  ! Fixed a potential crash when attempting to open a bag/backpack in the trade window.
+
+### Added / Changed
+- **FreeWeight** now shows “owning character’s free weight/free bag size” for open nested bags.
+- Player equipment screen shows “owning character’s free weight/free bag size” for an open nested bag.
+- When `UseScrollWheel=1`, you can scroll the monitor window (less efficient than HRP).
+
+### Fixed
+- Several issues with **Take All**/**Put All** buttons (including nested bags).
+- Items disappearing when placing them into a nested bag while overloaded.
+- Engine behavior retrieving equipped armor/weapons when a nested bag is open in the inventory.
+- Monitor window message when hitting a random target that isn’t a character but has a script.
+- Nested bag usage in the trade window.
+- Potential crash when opening a bag/backpack in the trade window.
+
+---
 
 ## v1.6
-* For the FreeWeight variable, we had to change the display format, removing the maximum value. The current format is "free weight" for characters and "free size" for containers.
-* Improved fix for the bug "forced use of explosives if the explosion hits someone nearby, returning to the map and then leaving the map again."
-  ! Fixed obj_can_hear_obj and slightly tweaked obj_can_see_obj.
-* Now, when the UseScrollWheel variable is enabled, you can scroll the target's inventory in the loot box/corpse window or the trade window.
+
+### Changed
+- **FreeWeight** display format changed: removed the max value.  
+  Now: “free weight” for characters, “free size” for containers.
+
+### Fixed
+- Improved fix for forced explosive use if an explosion hits someone nearby, then returning to the map and leaving again.
+- `obj_can_hear_obj` fixed; minor tweaks to `obj_can_see_obj`.
+
+### Added
+- With `UseScrollWheel=1`, scroll target’s inventory in loot/corpse window and trade window.
+
+---
 
 ## v1.5
-! Fixed a crash bug with explosives.
-Fixed a crash bug that occurred when using explosives (throw explosives and leave the map before they explode) if the explosion hits someone nearby, returning to the map, and then leaving again.
-! Now, when you force-use explosives and the victim dies, destroy_p_proc is called.
-* The value of the SpeedInterfaceCounterAnims variable can be equal to 2 - in this case, the value of the counters will change instantly.
-+ Added the InstanWeaponEquip variable, enabling which disables the animation of putting away/taking out weapons when changing them, opening boxes, etc.
-+ Added the TimeLimit variable :) The player's age is now displayed correctly on the character screen (however, it is limited to 99 so as not to spoil the output).
-+ Added PipboyTimeAnimDelay variable to change the speed of time animation in the Pipboy alarm clock.
-+ Added the AnimationsAtOnceLimit variable to increase the number of animations played simultaneously on the map.
-  ! Fixed a bug where extra action points were used in combat instead of the specified ones (2 AP) when using an item in hand (5 AP) or using the "Use item from backpack" action icon (3 AP).
-  ! Fixed the display of damage received during instant death.
+
+### Fixed
+- Crash bugs with explosives (including the sequence: throw → leave map pre-explosion → explosion hits someone → return → leave again).
+- On forced explosive use where the victim dies, `destroy_p_proc` is now called.
+- Incorrect usage of extra AP in combat when using hand items or “Use item from backpack” action icon.
+- Display of damage received during instant death.
+
+### Changed
+- `SpeedInterfaceCounterAnims` can be `2` for instant counter value updates.
+
+### Added
+- `InstanWeaponEquip` (disables put away/take out animations when switching weapons, opening boxes, etc.).
+- `TimeLimit` (player age displays correctly on the character screen; capped at 99).
+- `PipboyTimeAnimDelay` to adjust the Pip-Boy alarm clock animation speed.
+- `AnimationsAtOnceLimit` to increase the number of simultaneous map animations.
+
+---
 
 ## v1.4
-* Added CanSellUsedGeiger variable to control whether the Geiger Counter/Invisible Man can be sold after use.
-  ! Fixed the display in the game monitor window of the amount of experience points gained, taking into account the bonus from the "Diligent Student" perk, after killing enemies or stealing.
-  ! Fixed the "NPC turns into a container" bug.
+
+### Added
+- `CanSellUsedGeiger` to control whether the Geiger Counter/Invisible Man can be sold after use.
+
+### Fixed
+- Monitor window XP display accounting for the “Diligent Student” perk after kills/steals.
+- “NPC turns into a container” bug.
+
+---
 
 ## v1.3
-+ The NoCredits variable has been added to the [Debugging] section; enabling it disables the display of built-in thanks.
-  ! You can now sell the Geiger Counter/Invisible Man after using it.
-+ Added the QuestsFile variable to use a file containing information about quests added to the pipboy.
+
+### Added
+- `NoCredits` in `[Debugging]` to disable built-in credits.
+- `QuestsFile` to supply a file with Pip-Boy quest info.
+
+### Fixed
+- Geiger Counter/Invisible Man can be sold after use.
+
+---
 
 ## v1.2
-* The BlackSkilldexFix and DodgyDoorsFix variables have been removed from ddraw.ini - these are pure bug fixes, and enabling them permanently does not cause any side effects, so having these variables in the ini file is pointless.
-+ Added SaveInCombatFix and SuperStimExploitFix variables.
+
+### Removed
+- `BlackSkilldexFix` and `DodgyDoorsFix` from `ddraw.ini` (pure bugfixes enabled permanently).
+
+### Added
+- `SaveInCombatFix` and `SuperStimExploitFix`.
+
+---
 
 ## v1.1
-! Added the BlackSkilldexFix variable to fix the "black and inactive buttons if the Pip-Boy has many quests and holotapes" bug.
-! Fixed a bug that caused the game to crash when attempting to move something from a bag/backpack to the player's inventory.
 
-### 03/07/15
-! Fixed a bug with displaying negative values (0 will be shown) in the skills window.
-+ If the "Bonus Damage at Range" perk is taken, the inventory will show the change in min/max damage for the weapon in your hands.
-+ Added BonusHtHDamageFix variable (default = 1) - the effect of the "Melee Damage Bonus" perk is applied not only to the maximum, but also to the minimum damage with a melee weapon/without a weapon.
+### Added / Fixed
+- `BlackSkilldexFix` to address “black/inactive buttons when Pip-Boy has many quests/holotapes.”
+- Crash when moving items from bag/backpack to player inventory.
 
-### 01/07/15
-* The DebugMode variable can now be used not only with the debug version of the dll, but also with the release version.
-* The ExtraCRC variable can now specify multiple crc options, separated by commas.
+---
 
-### 30/06/15
-+ Added the RemoveFriendlyFoe variable, which removes the "Good Enemy" perk, but leaves its effect enabled (in battle, the outlines of party members will be green, like in F2).
+## 2015-07-03
 
-### 26/06/15
-+ Now you can use the line feed control character (\n) in object descriptions from pro_*.msg files.
+### Fixed
+- Negative value display in the skills window (now shows `0`).
 
-### 25/06/15
-! Just in case, we've fixed a bug that could cause the game to crash (even though it doesn't happen here) if you tried to kill any character after pumping them full of super stimulants and then leaving the map.
+### Added
+- If “Bonus Damage at Range” perk is taken, inventory shows min/max damage changes for the weapon in hand.
+- `BonusHtHDamageFix` (default `1`): “Melee Damage Bonus” applies to both min and max for melee/unarmed.
 
-### 24/06/15
-* If control (ControlCombat) of party members or all characters in battle is enabled, then the "Stealth" skill cannot be enabled for controlled characters.
+---
 
-### 20/06/15
-! Fixed a bug with dependency checking for any characters (previously, player data was always used).
+## 2015-07-01
 
-### 17/06/15
-+ Added the ControlCombat variable for controlling party members or all characters in combat. The ControlCombatPIDList variable allows you to specify specific characters to control. Player traits/perks do not apply to controlled characters. Controlled characters cannot equip armor in their inventory, cannot save, and pressing Enter (end combat) is recognized as Space (end turn).
+### Changed
+- `DebugMode` now usable with both debug and release DLL builds.
+- `ExtraCRC` now accepts multiple CRCs separated by commas.
 
-### 13/06/15
-! The engine's functions for retrieving equipped armor and weapons in hand have been fixed. They lack the required checks, and when called for a non-player, they return equipped armor and a weapon in the player's hand (assuming, of course, that the armor is equipped and the weapon is in the player's hand).
+---
 
-### 06/06/15
-+ Added the ColorLOS variable to change the outline color of enemies not within line of sight (LOS). The algorithm is similar to the F2 engine implementation: the "visibility" of LOS enemies is determined by the value of perception * 5. If the enemy has the "transparency" flag set (stealthboy enabled), then the "visibility" is halved - (perception * 5) / 2.
+## 2015-06-30
 
-### 30/05/15
-+ Added the DontTurnOffSneakIfYouRun variable. If enabled, the Sneak skill will not be disabled when sprinting is enabled and the "Silent Run" perk is not equipped. Instead, the character will walk.
+### Added
+- `RemoveFriendlyFoe`: removes the “Good Enemy” perk but keeps its effect (party outlines green in combat, like F2).
 
-### 29/05/15
-+ Added the AutoQuickSave variable for using more than one slot when quick saving (F6) without first selecting a slot. The value determines the number of slots used (1..10) – counting from the first slot, cycling through, overwriting the earliest game.
+---
 
-### 05/25/15
-* Fixed original SpeedInterfaceCounterAnims at death (negative values), when, for example, "-993" was shown instead of "-007".
-+ Added the EnableMusicInDialogue variable, which can be used to enable music playback when communicating with talking heads. The effect is the same as with non-talking heads - the music volume is halved.
-+ Added the MaxPCLevel variable, which can be used to change the maximum player level.
+## 2015-06-26
 
-### 16/05/15
-+ Added a fix for critical hit table errors and kill ap data. This is what OverrideCriticalTable=2 fixes in the F2 version.
+### Added
+- Support for `\n` line feeds in object descriptions from `pro_*.msg`.
 
-### 11/05/15
-+ Changed the distance to step from 5 to 1 when you need to use something on an object, pick it up, clean it, or use a skill on it.
-+ Changed the minimum and maximum values when selecting a player's age from 16-35 to 8-60.
-+ Added the FakeCombatFix variable to fix cheating with the "A" button – you can pick up items, open containers, and use something on someone if the target is nearby. After an aggressive action (shot/hit/etc.), you can move.
+---
 
-### 10/05/15
-+ Added TurnHighlightContainers variable to the [Input] section - turns on/off the highlighting of containers when using ToggleItemHighlightsKey.
-* The perk selection window on the character screen has been moved higher.
+## 2015-06-25
 
-### 05/05/15
-* ToggleItemHighlightsKey functionality has been expanded—it now highlights not only items on the ground but also containers. The highlighting is now in a different color. The highlighting is now aligned with the mouse cursor to eliminate the situation where an item is first highlighted by the mouse cursor, then the hotkey is pressed, released, and the highlighting disappears for the item the mouse cursor is on. To improve visibility, the highlighting color has been changed from yellow to pink when hovering over an item.
-+ An unused perk no longer "disappears" after receiving the next perk level (you can accumulate perks).
-* Fixed the possibility of getting multi-level perks earlier: for example, do not use a perk at level 9 and at 12 immediately take two levels of the same perk, which in the original can only be taken at levels 12 and 15.
+### Fixed
+- Potential crash when trying to kill a character after stacking them with super stims and then leaving the map.
 
-### 02/05/15
-+ Added variables NPCsTryToSpendExtraAP, RemoveCriticalTimelimits and PlayIdleAnimOnReload.
-+ Added the DrugExploitFix variable to disable the abuse of drug effects when reading books, receiving perks, and increasing skills.
-  ! Fixed two clickability bugs in the Pip-Boy.
-+ Added hotkeys for the Pip-Boy control buttons - '1' for 'Status', '3' for 'Map', '4' for 'Archives' and '2' for the alarm clock.
-  ! Just in case, the "Too Many Items Bug" has been fixed - "if it suddenly becomes impossible to access a map because the game freezes on a black screen" (c).
-  Fixed a bug when loading weapons in the inventory: if the weapon is unique and placed in front of the ammo, only one box of ammo is used, even if the maximum number of boxes is specified.
-  Fixed a bug affecting weapon loading using the "drag ammo from inventory to weapon in inventory" method when using the High Resolution Patch and the IFACE_BAR_MODE variable from f1_res.ini is set to 1 (the slot number for the item being dragged is incorrect).
-+ Added the ability to use Russian when entering the player name and description for saved games. Different localizations use different encodings (Fargus/LevCorp - 866, 1C -1251), so you need to select the appropriate one using the XltTable variable. In-game switching to Russian is performed by pressing the key specified in the XltKey variable (Scroll Lock by default).
-+ Added "Drop All" and "Take All" buttons when exchanging with a container. Hotkeys 'd'|'D' and 'a'|'A' can be used. The "Drop Item" and "Take/Use" mouse icons are used to display the buttons.
+---
 
-### 26/04/15
-+ Added the FreeWeight variable to display the free weight when trading with containers and during theft or trade (free weight is not shown for the merchant, as he can sell items even if they are underweight). The format is "free weight/maximum weight" for characters and "free volume/maximum volume" for containers.
-+ Added the ReloadWeaponKey variable, which assigns a hotkey for reloading a weapon or using an item in the active hand.
-+ Added AutoReloadWeapon variable to automatically reload weapons in both hands after the end of the battle.
-* Added ReloadReserve variable, which changes the mechanism of reloading weapons by dragging and dropping ammo onto this weapon: -1 = original with an intrusive window for entering the number of packs; 0 = use all available ammo; 1 or more = reserve ammo packs - if the available number of ammo packs is greater than the specified reserve, then all ammo minus the reserve will be used, if less than or equal to the reserve, then only one pack of ammo will be used.
-+ Added the StackEmptyWeapons variable for stacking identical weapons without ammo - solves the problem of two weapon stacks after unloading the same weapon, but with different ammo.
-+ Now, when you open your inventory, you can drag and drop stimpacks and other chemicals from your inventory onto the player's image with the use effect.
+## 2015-06-24
 
-### 23/04/15
-+ Added variables ToggleItemHighlightsKey, DisplayKarmaChanges and DebugMode.
+### Changed
+- When `ControlCombat` is enabled for party/all characters, “Stealth” cannot be enabled for controlled characters.
 
-### 22/04/15
-+ Added several variables from sfall2, like StartingMap, VersionString, etc.
-  ! The source code for v1.14a of the original sfall for Fallout 1 was used for compilation.
+---
+
+## 2015-06-20
+
+### Fixed
+- Dependency checking for arbitrary characters (previously always used player data).
+
+---
+
+## 2015-06-17
+
+### Added
+- `ControlCombat` to control party members or all characters in combat.  
+  Use `ControlCombatPIDList` to target specific PIDs.
+  - Player traits/perks don’t apply to controlled characters.
+  - Controlled characters cannot equip armor in their inventory and cannot save.
+  - Pressing **Enter** (end combat) is treated as **Space** (end turn).
+
+---
+
+## 2015-06-13
+
+### Fixed
+- Engine functions retrieving equipped armor and weapons in hand lacked required checks; when called for non-player, they returned the player’s gear.
+
+---
+
+## 2015-06-06
+
+### Added
+- `ColorLOS` to change outline color of enemies not within line of sight.  
+  Visibility is `PER * 5`; halved if enemy has “transparency” (stealthboy).
+
+---
+
+## 2015-05-30
+
+### Added
+- `DontTurnOffSneakIfYouRun`: with sprinting and without “Silent Run,” Sneak won’t toggle off — character walks instead.
+
+---
+
+## 2015-05-29
+
+### Added
+- `AutoQuickSave`: rotate through multiple quick-save slots (`1..10`), cycling and overwriting the oldest.
+
+---
+
+## 2015-05-25
+
+### Fixed
+- Original `SpeedInterfaceCounterAnims` at death (negative values like `-993` instead of `-007`).
+- Two Pip-Boy clickability bugs.
+- “Too Many Items” black-screen freeze on map access.
+- Weapon loading quirks with unique weapons placed before ammo (only one box used even when more allowed).
+- Weapon loading via drag-and-drop with HRP and `IFACE_BAR_MODE=1` (incorrect dragged item slot).
+
+### Added
+- `EnableMusicInDialogue`: enable music with talking heads; volume halves (like non-talking heads).
+- `MaxPCLevel` to change max player level.
+- Russian input for player name and savegame description.  
+  Select encoding via `XltTable` (e.g., Fargus/LevCorp 866, 1C 1251) and toggle in-game with `XltKey` (default: Scroll Lock).
+- “Drop All” and “Take All” buttons when exchanging with containers (`d`/`D`, `a`/`A` hotkeys).  
+  Uses “Drop Item” and “Take/Use” mouse icons.
+
+---
+
+## 2015-05-16
+
+### Added
+- Fix for critical hit table and `kill_ap` data (equivalent to `OverrideCriticalTable=2` in F2).
+
+---
+
+## 2015-05-11
+
+### Added
+- Step distance changed from `5` to `1` for use/pick/clean/skill actions on objects.
+- Player age selection range changed from `16–35` to `8–60`.
+- `FakeCombatFix`: prevents “A-button” abuse (pick items, open containers, use on targets nearby). Movement allowed after aggressive action.
+
+---
+
+## 2015-05-10
+
+### Added
+- `TurnHighlightContainers` in `[Input]` to toggle container highlighting with `ToggleItemHighlightsKey`.
+
+### Changed
+- Perk selection window on the character screen moved higher.
+
+---
+
+## 2015-05-05
+
+### Changed
+- `ToggleItemHighlightsKey` now also highlights containers (different color), tracks mouse-hovered item to avoid highlight flicker, and changes hover color from yellow to pink.
+- Unused perk no longer disappears after gaining the next perk level (perks can accumulate).
+- Prevents early acquisition of multi-level perks (e.g., skipping at level 9 then taking two at 12 when original allows only at 12 and 15).
+
+---
+
+## 2015-05-02
+
+### Added
+- `NPCsTryToSpendExtraAP`, `RemoveCriticalTimelimits`, `PlayIdleAnimOnReload`.
+- `DrugExploitFix` to disable exploits when reading books, gaining perks, and increasing skills.
+- Pip-Boy hotkeys: `1` = Status, `3` = Map, `4` = Archives, `2` = Alarm Clock.
+
+### Fixed
+- Two Pip-Boy clickability issues.
+- Weapon loading (inventory drag-to-weapon) issues with HRP and `IFACE_BAR_MODE=1`.
+
+### Changed
+- Loading unique weapons placed before ammo now respects maximum box count.
+
+### Added
+- Drag-and-drop stimpacks/chems onto the player image from inventory (use effect).
+
+---
+
+## 2015-04-26
+
+### Added
+- `FreeWeight` to display free weight when trading with containers and during theft or trade.  
+  Format:
+  - Characters: `free weight / maximum weight`
+  - Containers: `free volume / maximum volume`  
+    (Merchants can sell regardless of underweight; their free weight isn’t shown.)
+- `ReloadWeaponKey` hotkey for reloading or using item in active hand.
+- `AutoReloadWeapon` to reload weapons in both hands after combat.
+- `ReloadReserve` to change reload behavior:
+  - `-1` = original (prompt for number of packs),
+  - `0` = use all available ammo,
+  - `>=1` = reserve packs; if available > reserve → use all minus reserve, else use one pack.
+- `StackEmptyWeapons` to stack identical weapons without ammo (solves split stacks after unloading).
+
+### Added (QoL)
+- In inventory, you can drag stimpaks/chems onto the player to use them.
+
+---
+
+## 2015-04-23
+
+### Added
+- `ToggleItemHighlightsKey`, `DisplayKarmaChanges`, `DebugMode`.
+
+---
+
+## 2015-04-22
+
+### Added
+- Several variables ported from sfall2 (e.g., `StartingMap`, `VersionString`, etc.).  
+  **Note:** Compiled from the original Fallout 1 sfall v1.14a sources.

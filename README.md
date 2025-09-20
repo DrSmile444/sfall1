@@ -27,6 +27,9 @@ Development history:
 - A curated archive of **sfall1** versions found on the Internet (historical releases).
 - Each version lives in its own **branch** and **tag**, with a corresponding **GitHub Release** for easy download.
 - The **`main`** branch tracks the **latest** known stable version.
+- Releases include:
+    - Removal of extra code not related to plugin activation
+    - Additional Ukrainian, French, German, and Spanish translations
 
 > For sfall (FO2), see the official repo and docs: **sfall-team/sfall** and its GitHub Pages.
 > https://github.com/sfall-team/sfall

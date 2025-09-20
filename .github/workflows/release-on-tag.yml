@@ -1,0 +1,68 @@
+name: Release on tag
+
+on:
+  push:
+    tags:
+      - '*'            # or 'v*' if you want to restrict to semantic tags
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (with full history for tag message)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine tag name
+        run: echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+
+      # Extract annotated tag message; if lightweight tag, fall back to last commit message
+      - name: Read tag description
+        id: tagmsg
+        run: |
+          MSG="$(git for-each-ref --format='%(contents)' "refs/tags/${GITHUB_REF_NAME}")"
+          if [ -z "$MSG" ]; then
+            MSG="$(git log -1 --pretty=%B)"
+          fi
+          # Escape for GitHub Actions output
+          MSG="${MSG//'%'/'%25'}"; MSG="${MSG//$'\n'/'%0A'}"; MSG="${MSG//$'\r'/'%0D'}"
+          echo "message=$MSG" >> $GITHUB_OUTPUT
+
+      - name: Zip dist into release asset
+        run: |
+          if [ ! -d dist ]; then
+            echo "::error::dist/ not found. Build or check paths."
+            exit 1
+          fi
+          zip -r "sfall-${TAG}.zip" dist/*
+
+      - name: Compose release body (button first, then description)
+        run: |
+          DOWNLOAD_URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/sfall-${TAG}.zip"
+          # Use an image stored in your repo (commit one at .github/download-button.png), or replace with any image URL.
+          IMAGE_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main/.github/download-button.png"
+
+          {
+            echo "[![Download](${IMAGE_URL})](${DOWNLOAD_URL})"
+            echo
+            echo "---"
+            echo
+            # Unescape the message from previous step for body file
+            printf "%b" "${{ steps.tagmsg.outputs.message }}"
+          } > release_body.md
+
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: ${{ env.TAG }}
+          body_path: release_body.md
+          files: |
+            sfall-${{ env.TAG }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -41,7 +41,7 @@ Development history:
 4. Tune options in `ddraw.ini` if you want.
 
 > Notes:
-> - Feature sets vary by version. See each version’s `CHANGELOG/<version>.md` or original notes. 
+> - Feature sets vary by version. See each version’s [`CHANGELOG/<version>.md`](CHANGELOG/) or original notes. 
 
 ---
 
@@ -60,7 +60,7 @@ Development history:
 - **Timeslip** — original author of sfall (engine tweaks). 
 - **Crafty** — continued Fallout 1 branch (“sfall1”). 
 - **sfall team** — current maintainers of sfall (Fallout 2). 
-- Many community contributors over the years (see CREDITS.md).
+- **Many community contributors over the years** (see [`CREDITS.md`](CREDITS.md)).
 
 ---
 
@@ -68,11 +68,11 @@ Development history:
 
 This archive contains third-party releases that did not ship with explicit license files.
 Our root MIT license applies only to our own scripts and documentation.
-Third-party artifacts remain under their original licenses or permissions; where unclear, they are marked as unknown in THIRD-PARTY-NOTICES.md.
-We’re happy to correct licensing info or remove items at a rightsholder’s request (see DISTRIBUTION_POLICY.md).
+Third-party artifacts remain under their original licenses or permissions; where unclear, they are marked as unknown in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
+We’re happy to correct licensing info or remove items at a rightsholder’s request (see [`DISTRIBUTION_POLICY.md`](DISTRIBUTION_POLICY.md)).
 
 ---
 
 ## Disclaimer
 
-This is an archival convenience for the community. We do **not** own Fallout or sfall/sfall1. Respect all upstream licenses and the Fallout EULA. See **LICENSE** file.
+This is an archival convenience for the community. We do **not** own Fallout or sfall/sfall1. Respect all upstream licenses and the Fallout EULA. See [`LICENSE`](LICENSE) file.

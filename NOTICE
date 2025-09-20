@@ -1,0 +1,12 @@
+This repository contains both original materials by the repository owner
+(scripts, documentation, metadata) and third-party materials (binaries,
+release notes, and other artifacts related to “sfall1”).
+
+— The root LICENSE (MIT) applies ONLY to the repository owner’s original
+  materials. It does NOT apply to any third-party materials.
+— All third-party materials remain the property of their respective authors
+  and are governed by their original licenses or permissions (if any).
+— License information for third-party materials is documented in
+  THIRD-PARTY-NOTICES.md and per-release MANIFEST.json files.
+— If you are a rightsholder and want something changed or removed, see
+  DISTRIBUTION_POLICY.md.

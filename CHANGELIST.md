@@ -5,6 +5,15 @@
 
 ---
 
+## v1.8.28
+
+### Changed / Fixed
+- Fixed typos in `ddraw.ini`.
+- Updated some configuration values in `ddraw.ini`.
+- Added missing `ColorLOS` option to `ddraw.ini`.
+
+---
+
 ## v1.8
 
 ### Added
